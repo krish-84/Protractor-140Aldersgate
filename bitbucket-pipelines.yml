@@ -1,0 +1,28 @@
+#
+# AATLABS - QA pipeline
+#
+image: "aatlabs/qa:latest"
+
+pipelines:
+  default:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - yarn install --pure-lockfile
+          - npm test
+
+  branches:
+    feature/*:
+      - step:
+          script:
+          - yarn install --pure-lockfile
+          - npm run wdm:update
+          - npm run wdm:start &
+          - npm test
+    master:
+      - step:
+          script:
+          - yarn install --pure-lockfile
+          - npm run wdm:update
+          - npm run wdm:start 2>&1 &
+          #- nohup bash -c "webdriver-manager start 2>&1 &"
+          - npm test

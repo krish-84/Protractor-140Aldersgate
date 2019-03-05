@@ -1,0 +1,4 @@
+
+
+## Notes
+java -jar -Dwebdriver.gecko.driver=./servers/geckodriver ./servers/selenium-server-standalone-3.3.1.jar
